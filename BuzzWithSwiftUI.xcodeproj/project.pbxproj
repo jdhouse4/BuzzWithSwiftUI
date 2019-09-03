@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6724D15231ECD55009D3ED9 /* MilkyWaySpherical2048.png in Resources */ = {isa = PBXBuildFile; fileRef = E6724D14231ECD55009D3ED9 /* MilkyWaySpherical2048.png */; };
 		E67D7483231DDAB40026AB86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7482231DDAB40026AB86 /* AppDelegate.swift */; };
 		E67D7485231DDAB40026AB86 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7484231DDAB40026AB86 /* SceneDelegate.swift */; };
 		E67D7487231DDAB40026AB86 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7486231DDAB40026AB86 /* ContentView.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E6724D14231ECD55009D3ED9 /* MilkyWaySpherical2048.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MilkyWaySpherical2048.png; sourceTree = "<group>"; };
 		E67D747F231DDAB40026AB86 /* BuzzWithSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuzzWithSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67D7482231DDAB40026AB86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E67D7484231DDAB40026AB86 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 		E67D749C231DDD5F0026AB86 /* SceneKitAssets */ = {
 			isa = PBXGroup;
 			children = (
+				E6724D14231ECD55009D3ED9 /* MilkyWaySpherical2048.png */,
 				E6C5F597231E200B0087F34B /* UniverseSpherical.jpg */,
 				E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */,
 				E67D7499231DDD540026AB86 /* Buzz.scn */,
@@ -153,6 +156,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6724D15231ECD55009D3ED9 /* MilkyWaySpherical2048.png in Resources */,
 				E6C5F598231E200B0087F34B /* UniverseSpherical.jpg in Resources */,
 				E67D748F231DDAB50026AB86 /* LaunchScreen.storyboard in Resources */,
 				E67D749B231DDD540026AB86 /* Buzz.scn in Resources */,
