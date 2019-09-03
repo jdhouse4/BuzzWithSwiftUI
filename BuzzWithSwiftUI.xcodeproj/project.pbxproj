@@ -13,6 +13,10 @@
 		E67D7489231DDAB50026AB86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E67D7488231DDAB50026AB86 /* Assets.xcassets */; };
 		E67D748C231DDAB50026AB86 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E67D748B231DDAB50026AB86 /* Preview Assets.xcassets */; };
 		E67D748F231DDAB50026AB86 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E67D748D231DDAB50026AB86 /* LaunchScreen.storyboard */; };
+		E67D7497231DDB130026AB86 /* SceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7496231DDB130026AB86 /* SceneView.swift */; };
+		E67D749A231DDD540026AB86 /* Buzz_lightyear_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */; };
+		E67D749B231DDD540026AB86 /* Buzz.scn in Resources */ = {isa = PBXBuildFile; fileRef = E67D7499231DDD540026AB86 /* Buzz.scn */; };
+		E6C5F598231E200B0087F34B /* UniverseSpherical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E6C5F597231E200B0087F34B /* UniverseSpherical.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		E67D748B231DDAB50026AB86 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E67D748E231DDAB50026AB86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E67D7490231DDAB50026AB86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E67D7496231DDB130026AB86 /* SceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneView.swift; sourceTree = "<group>"; };
+		E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Buzz_lightyear_diffuse.png; sourceTree = "<group>"; };
+		E67D7499231DDD540026AB86 /* Buzz.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Buzz.scn; sourceTree = "<group>"; };
+		E6C5F597231E200B0087F34B /* UniverseSpherical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = UniverseSpherical.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +64,10 @@
 		E67D7481231DDAB40026AB86 /* BuzzWithSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				E67D749C231DDD5F0026AB86 /* SceneKitAssets */,
 				E67D7482231DDAB40026AB86 /* AppDelegate.swift */,
 				E67D7484231DDAB40026AB86 /* SceneDelegate.swift */,
+				E67D7496231DDB130026AB86 /* SceneView.swift */,
 				E67D7486231DDAB40026AB86 /* ContentView.swift */,
 				E67D7488231DDAB50026AB86 /* Assets.xcassets */,
 				E67D748D231DDAB50026AB86 /* LaunchScreen.storyboard */,
@@ -73,6 +83,16 @@
 				E67D748B231DDAB50026AB86 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E67D749C231DDD5F0026AB86 /* SceneKitAssets */ = {
+			isa = PBXGroup;
+			children = (
+				E6C5F597231E200B0087F34B /* UniverseSpherical.jpg */,
+				E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */,
+				E67D7499231DDD540026AB86 /* Buzz.scn */,
+			);
+			path = SceneKitAssets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,7 +153,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6C5F598231E200B0087F34B /* UniverseSpherical.jpg in Resources */,
 				E67D748F231DDAB50026AB86 /* LaunchScreen.storyboard in Resources */,
+				E67D749B231DDD540026AB86 /* Buzz.scn in Resources */,
+				E67D749A231DDD540026AB86 /* Buzz_lightyear_diffuse.png in Resources */,
 				E67D748C231DDAB50026AB86 /* Preview Assets.xcassets in Resources */,
 				E67D7489231DDAB50026AB86 /* Assets.xcassets in Resources */,
 			);
@@ -149,6 +172,7 @@
 				E67D7483231DDAB40026AB86 /* AppDelegate.swift in Sources */,
 				E67D7485231DDAB40026AB86 /* SceneDelegate.swift in Sources */,
 				E67D7487231DDAB40026AB86 /* ContentView.swift in Sources */,
+				E67D7497231DDB130026AB86 /* SceneView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
