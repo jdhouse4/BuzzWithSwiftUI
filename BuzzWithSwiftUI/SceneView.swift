@@ -33,10 +33,10 @@ struct SceneView: UIViewRepresentable {
         //scene.rootNode.addChildNode(ambientLightNode)
 
         // retrieve the ship node
-        let buzz = scene.rootNode.childNode(withName: "Buzz", recursively: true)!
+        //let buzz = scene.rootNode.childNode(withName: "Buzz", recursively: true)!
 
         // animate the 3d object
-        buzz.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 3)))
+        //buzz.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 3)))
 
         // retrieve the SCNView
         let scnView = SCNView()
