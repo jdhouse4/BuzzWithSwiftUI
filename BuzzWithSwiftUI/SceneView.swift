@@ -1,5 +1,5 @@
 //
-//  SceneView.swift
+//  SceneKitView.swift
 //  BuzzWithSwiftUI
 //
 //  Created by James Hillhouse IV on 9/2/19.
@@ -12,7 +12,7 @@ import SceneKit
 
 
 
-struct SceneView: UIViewRepresentable {
+struct SceneKitView: UIViewRepresentable {
     let scene = SCNScene(named: "Buzz.scn")!
 
 
@@ -71,7 +71,7 @@ struct SceneView: UIViewRepresentable {
 #if DEBUG
 struct ScenekitView_Previews : PreviewProvider {
     static var previews: some View {
-        SceneView()
+        SceneKitView()
     }
 }
 #endif
