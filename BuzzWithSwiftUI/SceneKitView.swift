@@ -75,12 +75,13 @@ struct SceneKitView: UIViewRepresentable {
         // Configure camera within view
         scnView.pointOfView = cameraNode
 
-        // SpriteKit Variables
-        let overlayScene: SKScene = SKScene()
-
+        let screenSize: CGSize =  UIScreen.main.bounds.size
 
         // Find the center of the screen
-        let screenCenter: CGPoint = overlayScene.view!.center
+        let screenCenter: CGPoint = CGPoint(x: screenSize.width/2, y: screenSize.height/2)
+
+        // Create SKScene
+        let overlayScene = SKScene(size: CGSize(width: screenSize.width, height: screenSize.height))
 
         // Add-in SKLabelNode for the title
         let headerTextNode = SKLabelNode(fontNamed: "HelveticaNeue")
@@ -109,6 +110,8 @@ struct SceneKitView: UIViewRepresentable {
                                                    action: #selector(Coordinator.buttonTapped(gesture:)))
 
         scnView.addGestureRecognizer(tappedGesture)
+
+        scnView.overlaySKScene = overlayScene
 
         return scnView
     }
