@@ -9,9 +9,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var lightTypeIndex = 0
+    
     var body: some View {
         ZStack(alignment: .bottom) {
-            SceneKitView()
+            SceneKitView(lightTypeIndex: $lightTypeIndex)
         }
     }
 }
