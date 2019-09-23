@@ -136,13 +136,6 @@ struct SceneKitView: UIViewRepresentable {
     }
 
 
-    /*
-    mutating func createOverlayScene(overlayScene: SKScene, screenSize: CGSize) {
-            overlayScene = SKScene(size: CGSize(width: screenSize.width, height: screenSize.height))
-            overlayScene.name = "BuzzSKSceneOverlay"
-        }
-    */
-
 
 
     class Coordinator: NSObject {
@@ -157,11 +150,11 @@ struct SceneKitView: UIViewRepresentable {
             print("Button tapped")
 
             let scnOverlayScene: SKScene = scnView.overlayScene
-            
+
             let buzzLight = scnView.scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
             print("\(String(describing: buzzLight.name))")
 
-
+            
         }
     }
 }
