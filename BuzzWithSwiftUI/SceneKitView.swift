@@ -22,6 +22,14 @@ struct SceneKitView: UIViewRepresentable {
     // SceneKit Properties
     let scene = SCNScene(named: "Buzz.scn")!
 
+    //lazy var lightNode: SCNNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
+
+    var lightNode: SCNNode = SCNNode()
+
+    var changingLightNode: SCNNode = SCNNode()
+
+    var lightIndex: Int = 0 // Directional
+
     @Binding var lightTypeIndex: Int
 
     var lightBulbImageNode: SKSpriteNode = SKSpriteNode(imageNamed: "lightbulb")
@@ -56,18 +64,22 @@ struct SceneKitView: UIViewRepresentable {
         ambientLightNode.light!.color = UIColor(red: 0.2, green: 0.16, blue: 0.16, alpha: 0.0)
         //scene.rootNode.addChildNode(ambientLightNode)
 
-        let lightNode: SCNNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
+        //let lightNode: SCNNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
 
-        // Create and add to the scene that will be changed to demonstrate the rendering issues.
-//        let lightNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
-//        lightNode.light!.name = "BuzzLight"
-//        lightNode.light!.type = .directional
-//        lightNode.light!.intensity = 2000.0
-//        lightNode.light!.categoryBitMask = 2
-//        lightNode.light!.castsShadow = true
-//        lightNode.position = SCNVector3(x: 0, y: 0, z: 15)
-//        scene.rootNode.addChildNode(lightNode)
+        // Work-around on struct immutability for UIViewRepresentable function makeView.
+        // Making makeView mutable breaks protocol conformance.
+        // Create childLightNode.
+        let childLightNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
 
+        //let changingLightNode = SCNNode()
+        changingLightNode.light = SCNLight()
+        changingLightNode.light!.name = "ChangingLightNode"
+        changingLightNode.light!.type = .directional
+        changingLightNode.light!.intensity = 500.0
+        changingLightNode.light!.categoryBitMask = 2
+        changingLightNode.light!.castsShadow = true
+        changingLightNode.position = SCNVector3(x: 0.0, y: 8.0, z: 15)
+        scene.rootNode.addChildNode(changingLightNode)
 
         // Retrieve Buzz SCNNode
         //let buzz = scene.rootNode.childNode(withName: "Buzz", recursively: true)!
@@ -91,21 +103,23 @@ struct SceneKitView: UIViewRepresentable {
         let headerTextNode = SKLabelNode(fontNamed: "HelveticaNeue")
         headerTextNode.text = "Light Rendering Issues"
         headerTextNode.fontSize = 24
-        headerTextNode.fontColor = SKColor.black
-        headerTextNode.position = CGPoint(x: screenCenter.x, y: screenSize.height - 75.0)
+        headerTextNode.fontColor = SKColor.white
+        headerTextNode.position = CGPoint(
+            x: screenCenter.x,
+            y: screenSize.height - 75.0)
         overlayScene.addChild(headerTextNode)
 
         //Add-in the SKSpriteNode for the button to change the light type
-        lightBulbImageNode.name = "light"
+        lightBulbImageNode.name = "lightBulbImageNode"
         lightBulbImageNode.xScale = 2.0
         lightBulbImageNode.yScale = 2.0
         lightBulbImageNode.position = CGPoint(x: screenCenter.x, y: 100)
         overlayScene.addChild(lightBulbImageNode)
 
         // Add-in SKLabelNode for the light currently in use
-        lightTextNode.text = lightNode.light!.type.rawValue
+        lightTextNode.text = changingLightNode.light!.type.rawValue
         lightTextNode.fontSize = 20
-        lightTextNode.fontColor = .black
+        lightTextNode.fontColor = .white
         lightTextNode.position = CGPoint(x: screenCenter.x,
                                          y:  lightBulbImageNode.position.y + lightBulbImageNode.frame.size.height / 2.0)
         overlayScene.addChild(lightTextNode)
@@ -149,12 +163,67 @@ struct SceneKitView: UIViewRepresentable {
         @objc func buttonTapped(gesture: UITapGestureRecognizer) {
             print("Button tapped")
 
+            // Retrieve the SKScene.
             let scnOverlayScene: SKScene = scnView.overlayScene
 
-            let buzzLight = scnView.scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
-            print("\(String(describing: buzzLight.name))")
+            // Determine the location within the view the gesture occured.
+            let p = gesture.location(in: gesture.view)
 
-            
+            // Convert the node tapped from  view coords to scene coords.
+            let hitResult = scnOverlayScene.convertPoint(fromView: p)
+
+            // Determine which node was tapped.
+            let hitNode = scnOverlayScene.atPoint(hitResult)
+
+            // Give the user some indication which sprite was touched.
+            if hitNode.name == "lightBulbImageNode"
+            {
+                // Highlight the lightBulbImageNode
+                // But first, set-up a sequence of SKAction events.
+                let lightBulbAction = SKAction.sequence(
+                    [SKAction.scaleX(to: 0, duration: 0.05),
+                     SKAction.scale(to: 2, duration: 0.05)
+                ])
+
+                // Run the SKAction
+                scnView.lightBulbImageNode.run(lightBulbAction)
+
+                // Retrieve the changingLightNode
+                //let changingLightNode = scnView.scene.rootNode.childNode(withName: "ChangingLightNode", recursively: true)!
+
+                // Increment the lightIndex
+                scnView.lightIndex += 1
+
+                if scnView.lightIndex == 4
+                {
+                    scnView.lightIndex = 0
+                }
+
+                switch scnView.lightIndex {
+                case 0:
+                    scnView.changingLightNode.light?.type = .directional
+                    scnView.lightTextNode.text = scnView.changingLightNode.light?.type.rawValue
+                case 1:
+                    scnView.changingLightNode.light?.type = .spot
+                    scnView.lightTextNode.text = scnView.changingLightNode.light?.type.rawValue
+                case 2:
+                    scnView.changingLightNode.light?.type = .omni
+                    scnView.lightTextNode.text = scnView.changingLightNode.light?.type.rawValue
+                case 3:
+                    scnView.changingLightNode.light?.type = .ambient
+                    scnView.lightTextNode.text = scnView.changingLightNode.light?.type.rawValue
+                default:
+                    scnView.changingLightNode.light?.type = .directional
+                    scnView.lightTextNode.text = scnView.changingLightNode.light?.type.rawValue
+                }
+
+            }
+
+            /*
+            let lightNode = scnView.scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
+            print("\(String(describing: lightNode.name))")
+            */
+
         }
     }
 }
