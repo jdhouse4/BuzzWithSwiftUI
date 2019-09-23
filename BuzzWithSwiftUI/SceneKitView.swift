@@ -22,17 +22,25 @@ struct SceneKitView: UIViewRepresentable {
     // SceneKit Properties
     let scene = SCNScene(named: "Buzz.scn")!
 
-    //lazy var lightNode: SCNNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
-
     @Binding var lightTypeIndex: Int
 
     var lightBulbImageNode: SKSpriteNode = SKSpriteNode(imageNamed: "lightbulb")
 
     var lightTextNode: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
 
+    var overlayScene: SKScene = SKScene()
+
 
 
     func makeUIView(context: Context) -> SCNView {
+        // retrieve the SCNView
+        let scnView = SCNView()
+
+
+        // configure the view
+        scnView.backgroundColor = UIColor.black
+
+
         // Create and add a camera to the scene
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
@@ -45,18 +53,20 @@ struct SceneKitView: UIViewRepresentable {
         let ambientLightNode = SCNNode()
         ambientLightNode.light = SCNLight()
         ambientLightNode.light!.type = .ambient
-        ambientLightNode.light!.color = UIColor(red: 0.1, green: 0.08, blue: 0.08, alpha: 0.0)
+        ambientLightNode.light!.color = UIColor(red: 0.2, green: 0.16, blue: 0.16, alpha: 0.0)
         //scene.rootNode.addChildNode(ambientLightNode)
 
+        let lightNode: SCNNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
+
         // Create and add to the scene that will be changed to demonstrate the rendering issues.
-        let lightNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
-        lightNode.light!.name = "BuzzLight"
-        lightNode.light!.type = .directional
-        lightNode.light!.intensity = 2000.0
-        lightNode.light!.categoryBitMask = 2
-        lightNode.light!.castsShadow = true
-        lightNode.position = SCNVector3(x: 0, y: 0, z: 15)
-        scene.rootNode.addChildNode(lightNode)
+//        let lightNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
+//        lightNode.light!.name = "BuzzLight"
+//        lightNode.light!.type = .directional
+//        lightNode.light!.intensity = 2000.0
+//        lightNode.light!.categoryBitMask = 2
+//        lightNode.light!.castsShadow = true
+//        lightNode.position = SCNVector3(x: 0, y: 0, z: 15)
+//        scene.rootNode.addChildNode(lightNode)
 
 
         // Retrieve Buzz SCNNode
@@ -66,12 +76,6 @@ struct SceneKitView: UIViewRepresentable {
         //buzz.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 3)))
 
 
-        // retrieve the SCNView
-        let scnView = SCNView()
-
-        // configure the view
-        scnView.backgroundColor = UIColor.black
-
         // Configure camera within view
         scnView.pointOfView = cameraNode
 
@@ -80,8 +84,8 @@ struct SceneKitView: UIViewRepresentable {
         // Find the center of the screen
         let screenCenter: CGPoint = CGPoint(x: screenSize.width/2, y: screenSize.height/2)
 
-        // Create SKScene
-        let overlayScene = SKScene(size: CGSize(width: screenSize.width, height: screenSize.height))
+        //createOverlayScene(overlayScene: overlayScene, screenSize: screenSize)
+        overlayScene.size = CGSize(width: screenSize.width, height: screenSize.height)
 
         // Add-in SKLabelNode for the title
         let headerTextNode = SKLabelNode(fontNamed: "HelveticaNeue")
@@ -129,23 +133,35 @@ struct SceneKitView: UIViewRepresentable {
 
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
-
-        
     }
 
+
+    /*
+    mutating func createOverlayScene(overlayScene: SKScene, screenSize: CGSize) {
+            overlayScene = SKScene(size: CGSize(width: screenSize.width, height: screenSize.height))
+            overlayScene.name = "BuzzSKSceneOverlay"
+        }
+    */
 
 
 
     class Coordinator: NSObject {
-        var sceneView: SceneKitView
+        var scnView: SceneKitView
 
-        init(_ sceneView: SceneKitView) {
-            self.sceneView = sceneView
+        init(_ scnView: SceneKitView) {
+            self.scnView = scnView
 
         }
 
         @objc func buttonTapped(gesture: UITapGestureRecognizer) {
             print("Button tapped")
+
+            let scnOverlayScene: SKScene = scnView.overlayScene
+            
+            let buzzLight = scnView.scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
+            print("\(String(describing: buzzLight.name))")
+
+
         }
     }
 }
