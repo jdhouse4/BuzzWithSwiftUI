@@ -22,17 +22,19 @@ struct SceneKitView: UIViewRepresentable {
     // SceneKit Properties
     let scene = SCNScene(named: "Buzz.scn")!
 
-    //lazy var lightNode: SCNNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
-
-    var lightNode: SCNNode = SCNNode()
-
     var changingLightNode: SCNNode = SCNNode()
+
+    var lightSwitch: Bool = false
 
     var lightIndex: Int = 0 // Directional
 
     @Binding var lightTypeIndex: Int
 
-    var lightBulbImageNode: SKSpriteNode = SKSpriteNode(imageNamed: "lightbulb")
+    var lightBulbImageNode: SKSpriteNode = SKSpriteNode(imageNamed: "lightbulbHighlighted")
+
+    //var lightBulbImageNode: SKSpriteNode = SKSpriteNode(imageNamed: "lightbulb")
+
+    var lightSwitchImageNode: SKSpriteNode = SKSpriteNode(imageNamed: "lightSwitchHighlighted")
 
     var lightTextNode: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
 
@@ -69,7 +71,8 @@ struct SceneKitView: UIViewRepresentable {
         // Work-around on struct immutability for UIViewRepresentable function makeView.
         // Making makeView mutable breaks protocol conformance.
         // Create childLightNode.
-        let childLightNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
+        //let buzzFaceLightNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
+
 
         //let changingLightNode = SCNNode()
         changingLightNode.light = SCNLight()
@@ -113,8 +116,18 @@ struct SceneKitView: UIViewRepresentable {
         lightBulbImageNode.name = "lightBulbImageNode"
         lightBulbImageNode.xScale = 2.0
         lightBulbImageNode.yScale = 2.0
-        lightBulbImageNode.position = CGPoint(x: screenCenter.x, y: 100)
+        lightBulbImageNode.position = CGPoint(
+            x: screenCenter.x * 1.5,
+            y: 100)
         overlayScene.addChild(lightBulbImageNode)
+
+        lightSwitchImageNode.name = "lightSwitchImageNode"
+        lightSwitchImageNode.xScale = 2.0
+        lightSwitchImageNode.yScale = 2.0
+        lightSwitchImageNode.position = CGPoint(
+            x: screenCenter.x * 0.5,
+            y: 100)
+        overlayScene.addChild(lightSwitchImageNode)
 
         // Add-in SKLabelNode for the light currently in use
         lightTextNode.text = changingLightNode.light!.type.rawValue
@@ -175,21 +188,19 @@ struct SceneKitView: UIViewRepresentable {
             // Determine which node was tapped.
             let hitNode = scnOverlayScene.atPoint(hitResult)
 
+            // But first, set-up a sequence of SKAction events.
+            let lightBulbAction = SKAction.sequence(
+                [SKAction.scaleX(to: 0, duration: 0.05),
+                 SKAction.scale(to: 2, duration: 0.05)
+            ])
+
+
             // Give the user some indication which sprite was touched.
             if hitNode.name == "lightBulbImageNode"
             {
-                // Highlight the lightBulbImageNode
-                // But first, set-up a sequence of SKAction events.
-                let lightBulbAction = SKAction.sequence(
-                    [SKAction.scaleX(to: 0, duration: 0.05),
-                     SKAction.scale(to: 2, duration: 0.05)
-                ])
 
                 // Run the SKAction
                 scnView.lightBulbImageNode.run(lightBulbAction)
-
-                // Retrieve the changingLightNode
-                //let changingLightNode = scnView.scene.rootNode.childNode(withName: "ChangingLightNode", recursively: true)!
 
                 // Increment the lightIndex
                 scnView.lightIndex += 1
@@ -216,14 +227,19 @@ struct SceneKitView: UIViewRepresentable {
                     scnView.changingLightNode.light?.type = .directional
                     scnView.lightTextNode.text = scnView.changingLightNode.light?.type.rawValue
                 }
-
             }
 
-            /*
-            let lightNode = scnView.scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
-            print("\(String(describing: lightNode.name))")
-            */
+            if hitNode.name == "lightSwitchImageNode"
+            {
+                scnView.lightSwitchImageNode.run(lightBulbAction)
 
+                let lightNode = scnView.scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)
+
+                // Toggle Buzz' face lamp
+                scnView.lightSwitch.toggle()
+
+                lightNode!.isHidden = scnView.lightSwitch
+            }
         }
     }
 }
