@@ -9,24 +9,32 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var lightTypeIndex = 0
+    @State var lightSwitch: Bool = false
 
 
     var onOffButton: some View {
-        Button(action: { self.showingProfile.toggle() }) {
-            Image(systemName: "person.crop.circle")
+        Button(action: {
+            self.lightSwitch.toggle()
+            print("Setting lightSwitch: \(self.lightSwitch)")
+        }) {
+            Image(systemName: "power")
                 .imageScale(.large)
-                .accessibility(label: Text("User Profile"))
+                .accessibility(label: Text("Buzz Lamp"))
                 .padding()
         }
     }
 
     
     var body: some View {
-        ZStack(alignment: .top) {
-            SceneKitView(lightTypeIndex: $lightTypeIndex)
-                //.frame(width: 150.0, height: 250.0, alignment: .top)
+        VStack(alignment: .center, spacing: 20) {
+            Spacer()
+
+            SceneKitView(lightSwitch: $lightSwitch)
                 .scaleEffect(0.5, anchor: .top)
+
+            Spacer()
+
+            onOffButton
         }
     }
 }

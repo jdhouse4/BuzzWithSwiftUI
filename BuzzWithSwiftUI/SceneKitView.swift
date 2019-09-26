@@ -24,11 +24,11 @@ struct SceneKitView: UIViewRepresentable {
 
     var changingLightNode: SCNNode = SCNNode()
 
-    var lightSwitch: Bool = false
+    @Binding var lightSwitch: Bool
 
     var lightIndex: Int = 0 // Directional
 
-    @Binding var lightTypeIndex: Int
+    //@Binding var lightTypeIndex: Int
 
     var lightBulbImageNode: SKSpriteNode = SKSpriteNode(imageNamed: "lightbulbHighlighted")
 
@@ -45,6 +45,8 @@ struct SceneKitView: UIViewRepresentable {
     func makeUIView(context: Context) -> SCNView {
         // retrieve the SCNView
         let scnView = SCNView()
+
+        //lightSwitch = false
 
 
         // configure the view
@@ -160,6 +162,12 @@ struct SceneKitView: UIViewRepresentable {
 
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
+
+        let lightNode = scnView.scene!.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)
+
+        lightNode!.isHidden = lightSwitch
+
+        print("lightSwitch: \(lightSwitch)")
     }
 
 
@@ -172,6 +180,7 @@ struct SceneKitView: UIViewRepresentable {
             self.scnView = scnView
 
         }
+
 
         @objc func buttonTapped(gesture: UITapGestureRecognizer) {
             print("Button tapped")
@@ -241,73 +250,13 @@ struct SceneKitView: UIViewRepresentable {
                 lightNode!.isHidden = scnView.lightSwitch
             }
         }
-    }
-}
-/*
-    @objc
-    func handleTap(_ gestureRecognize: UIGestureRecognizer) {
-        // Retrieve the current scene's SKScene
-        let scnOverlayScene = overlayScene
 
-        // At what CGPoint did the tap occur?
-        let p = gestureRecognize.location(in: self.view)
 
-        // Convert the node tapped from view coords to scene coords.
-        let hitResult = scnOverlayScene.convertPoint(fromView: p)
 
-        // Now determine which node was tapped.
-        let hitNode = scnOverlayScene.atPoint(hitResult)
-
-        // Give the user some indication that the button was tapped.
-        if hitNode.name == "light"
-        {
-            // Highlight the lightBulbImageNode
-            // Set-up a sequenc of SKAction events.
-            let lightAction = SKAction.sequence(
-                [SKAction.scaleX(to: 0, duration: 0.05),
-                 SKAction.scale(to: 2, duration: 0.05),
-            ])
-
-            // Run the SKAction sequence.
-            lightBulbImageNode.run(lightAction)
-
-            // Increment the light type
-            lightIndex += 1
-
-            if lightIndex == 4
-            {
-                lightIndex = 0
-            }
-
-            switch lightIndex {
-            case 0:
-                lightNode.light?.type = .directional
-                lightTextNode.text = lightNode.light?.type.rawValue
-            case 1:
-                lightNode.light?.type = .spot
-                lightTextNode.text = lightNode.light?.type.rawValue
-            case 2:
-                lightNode.light?.type = .omni
-                lightTextNode.text = lightNode.light?.type.rawValue
-            case 3:
-                lightNode.light?.type = .ambient
-                lightTextNode.text = lightNode.light?.type.rawValue
-            default:
-                lightNode.light?.type = .directional
-                lightTextNode.text = lightNode.light?.type.rawValue
+        @objc func updateBuzzFaceLamp(sender: Any) {
+            if scnView.lightSwitch {
+                print("Light Switch Hit Bigley!")
             }
         }
     }
 }
- */
-
-
-/*
-#if DEBUG
-struct ScenekitView_Previews : PreviewProvider {
-    static var previews: some View {
-        SceneKitView(lightNode: <#T##Binding<SCNNode>#>)
-    }
-}
-#endif
-*/
