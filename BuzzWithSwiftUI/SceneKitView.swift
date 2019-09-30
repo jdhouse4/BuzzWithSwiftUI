@@ -14,9 +14,15 @@ import SpriteKit
 
 
 struct SceneKitView: UIViewRepresentable {
+
+
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        return Coordinator(self, lightSwitch: $lightSwitch, sunlightSwitch: $sunlightSwitch)
     }
+
+
+    @Binding var lightSwitch: Bool
+    @Binding var sunlightSwitch: Int
 
 
     // SceneKit Properties
@@ -24,15 +30,9 @@ struct SceneKitView: UIViewRepresentable {
 
     var changingLightNode: SCNNode = SCNNode()
 
-    @Binding var lightSwitch: Bool
-
     var lightIndex: Int = 0 // Directional
 
-    //@Binding var lightTypeIndex: Int
-
     var lightBulbImageNode: SKSpriteNode = SKSpriteNode(imageNamed: "lightbulbHighlighted")
-
-    //var lightBulbImageNode: SKSpriteNode = SKSpriteNode(imageNamed: "lightbulb")
 
     var lightSwitchImageNode: SKSpriteNode = SKSpriteNode(imageNamed: "lightSwitchHighlighted")
 
@@ -45,8 +45,6 @@ struct SceneKitView: UIViewRepresentable {
     func makeUIView(context: Context) -> SCNView {
         // retrieve the SCNView
         let scnView = SCNView()
-
-        //lightSwitch = false
 
 
         // configure the view
@@ -61,22 +59,6 @@ struct SceneKitView: UIViewRepresentable {
         // place the camera
         cameraNode.position = SCNVector3(x: 0, y: 10, z: 20)
 
-        // create and add an ambient light to the scene
-        let ambientLightNode = SCNNode()
-        ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = .ambient
-        ambientLightNode.light!.color = UIColor(red: 0.2, green: 0.16, blue: 0.16, alpha: 0.0)
-        //scene.rootNode.addChildNode(ambientLightNode)
-
-        //let lightNode: SCNNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
-
-        // Work-around on struct immutability for UIViewRepresentable function makeView.
-        // Making makeView mutable breaks protocol conformance.
-        // Create childLightNode.
-        //let buzzFaceLightNode = scene.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)!
-
-
-        //let changingLightNode = SCNNode()
         changingLightNode.light = SCNLight()
         changingLightNode.light!.name = "ChangingLightNode"
         changingLightNode.light!.type = .directional
@@ -85,12 +67,6 @@ struct SceneKitView: UIViewRepresentable {
         changingLightNode.light!.castsShadow = true
         changingLightNode.position = SCNVector3(x: 0.0, y: 8.0, z: 15)
         scene.rootNode.addChildNode(changingLightNode)
-
-        // Retrieve Buzz SCNNode
-        //let buzz = scene.rootNode.childNode(withName: "Buzz", recursively: true)!
-
-        // animate the 3d object
-        //buzz.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 3)))
 
 
         // Configure camera within view
@@ -142,6 +118,7 @@ struct SceneKitView: UIViewRepresentable {
         let tappedGesture = UITapGestureRecognizer(target: context.coordinator,
                                                    action: #selector(Coordinator.buttonTapped(gesture:)))
 
+
         scnView.addGestureRecognizer(tappedGesture)
 
         scnView.overlaySKScene = overlayScene
@@ -163,22 +140,31 @@ struct SceneKitView: UIViewRepresentable {
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
 
+        toggleBuzzFaceLamp(scnView)
+    }
+
+
+    
+    func toggleBuzzFaceLamp(_ scnView: SCNView) {
         let lightNode = scnView.scene!.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)
 
         lightNode!.isHidden = lightSwitch
-
-        print("lightSwitch: \(lightSwitch)")
     }
 
 
 
 
     class Coordinator: NSObject {
+
+        @Binding var lightSwitch: Bool
+        @Binding var sunlightSwitch: Int
+
         var scnView: SceneKitView
 
-        init(_ scnView: SceneKitView) {
+        init(_ scnView: SceneKitView, lightSwitch: Binding<Bool>, sunlightSwitch: Binding<Int>) {
             self.scnView = scnView
-
+            self._lightSwitch = lightSwitch
+            self._sunlightSwitch = sunlightSwitch
         }
 
 

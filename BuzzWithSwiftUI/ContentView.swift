@@ -10,32 +10,31 @@ import SwiftUI
 
 struct ContentView: View {
     @State var lightSwitch: Bool = false
+    @State var sunlightSwitch: Int = 0
 
 
-    var onOffButton: some View {
-        Button(action: {
-            self.lightSwitch.toggle()
-            print("Setting lightSwitch: \(self.lightSwitch)")
-        }) {
-            Image(systemName: "power")
-                .imageScale(.large)
-                .accessibility(label: Text("Buzz Lamp"))
-                .padding()
-        }
-    }
-
-    
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             Spacer()
 
-            SceneKitView(lightSwitch: $lightSwitch)
-                .scaleEffect(0.5, anchor: .top)
+            SceneKitView(lightSwitch: $lightSwitch, sunlightSwitch: $sunlightSwitch)
+                .scaleEffect(0.75, anchor: .top)
 
             Spacer()
 
-            onOffButton
+            HStack {
+                Spacer()
+
+                BuzzFaceLampButton(lightSwitch: $lightSwitch)
+
+                Spacer(minLength: 150)
+
+                SunLightButton(sunlightSwitch: $sunlightSwitch)
+
+                Spacer()
+            }
         }
+    .padding()
     }
 }
 
