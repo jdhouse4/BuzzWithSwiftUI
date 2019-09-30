@@ -28,7 +28,7 @@ struct SceneKitView: UIViewRepresentable {
     // SceneKit Properties
     let scene = SCNScene(named: "Buzz.scn")!
 
-    var changingLightNode: SCNNode = SCNNode()
+    var sunlightNode: SCNNode = SCNNode()
 
     var lightTextNode: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
 
@@ -53,31 +53,35 @@ struct SceneKitView: UIViewRepresentable {
         // Place the camera
         cameraNode.position = SCNVector3(x: 0, y: 10, z: 20)
 
-        changingLightNode.name = "ChangingLightNode"
-        changingLightNode.light = SCNLight()
-        changingLightNode.light!.type = .directional
-        changingLightNode.light!.intensity = 500.0
-        changingLightNode.light!.categoryBitMask = 2
-        changingLightNode.light!.castsShadow = true
-        changingLightNode.position = SCNVector3(x: 0.0, y: 8.0, z: 15)
-        scene.rootNode.addChildNode(changingLightNode)
-
-
         // Configure camera within view
         scnView.pointOfView = cameraNode
 
+
+        // Create sunlight node to shine a little light on the whole scene.
+        sunlightNode.name = "ChangingLightNode"
+        sunlightNode.light = SCNLight()
+        sunlightNode.light!.type = .directional
+        sunlightNode.light!.intensity = 500.0
+        sunlightNode.light!.categoryBitMask = 2
+        sunlightNode.light!.castsShadow = true
+        sunlightNode.position = SCNVector3(x: 0.0, y: 8.0, z: 15)
+        scene.rootNode.addChildNode(sunlightNode)
+
+
+        // This code is needed for placing the overlay text.
         let screenSize: CGSize =  UIScreen.main.bounds.size
 
         // Find the center of the screen
         let screenCenter: CGPoint = CGPoint(x: screenSize.width/2, y: screenSize.height/2)
 
-        //createOverlayScene(overlayScene: overlayScene, screenSize: screenSize)
+        // Give the overlayScene property a size.
         overlayScene.size = CGSize(width: screenSize.width, height: screenSize.height)
+
 
         // Add-in SKLabelNode for the light currently in use
         lightTextNode.name = "SunlightTypeTextNode"
-        lightTextNode.text = changingLightNode.light!.type.rawValue
-        lightTextNode.fontSize = 20
+        lightTextNode.text = sunlightNode.light!.type.rawValue
+        lightTextNode.fontSize = 30
         lightTextNode.fontColor = .white
         lightTextNode.position = CGPoint(x: screenCenter.x,
                                          y:  50)
@@ -118,35 +122,28 @@ struct SceneKitView: UIViewRepresentable {
 
 
     func toggleSunlight(_ scnView: SCNView) {
-        let sunlightNode = scnView.scene!.rootNode.childNode(withName: "ChangingLightNode", recursively: true)
-        //let sunlightTypeTextNode = scnView.scene!.rootNode.childNode(withName: "SunlightTypeTextNode", recursively: true)!
-
-        
-        //print(sunlightTypeTextNode)
-
         switch sunlightSwitch {
         case 0:
-            sunlightNode!.light?.type = .directional
-            //sunlightTypeTextNode.text = sunlightNode!.light?.type.rawValue
+            sunlightNode.light?.type = .directional
+            lightTextNode.text = sunlightNode.light?.type.rawValue
         case 1:
-            sunlightNode!.light?.type = .spot
-            //sunlightTypeTextNode.text = sunlightNode!.light?.type.rawValue
+            sunlightNode.light?.type = .spot
+            lightTextNode.text = sunlightNode.light?.type.rawValue
         case 2:
-            sunlightNode!.light?.type = .omni
-            //sunlightTypeTextNode.text = sunlightNode!.light?.type.rawValue
+            sunlightNode.light?.type = .omni
+            lightTextNode.text = sunlightNode.light?.type.rawValue
         case 3:
-            sunlightNode!.light?.type = .ambient
-            //sunlightTypeTextNode.text = sunlightNode!.light?.type.rawValue
+            sunlightNode.light?.type = .ambient
+            lightTextNode.text = sunlightNode.light?.type.rawValue
         default:
-            sunlightNode!.light?.type = .directional
-            //sunlightTypeTextNode.text = sunlightNode!.light?.type.rawValue
+            sunlightNode.light?.type = .directional
+            lightTextNode.text = sunlightNode.light?.type.rawValue
         }
     }
 
 
 
-
-
+    
     class Coordinator: NSObject {
 
         @Binding var lightSwitch: Bool
@@ -158,13 +155,6 @@ struct SceneKitView: UIViewRepresentable {
             self.scnView = scnView
             self._lightSwitch = lightSwitch
             self._sunlightSwitch = sunlightSwitch
-        }
-
-
-        @objc func updateBuzzFaceLamp(sender: Any) {
-            if scnView.lightSwitch {
-                print("Light Switch Hit Bigley!")
-            }
         }
     }
 }
