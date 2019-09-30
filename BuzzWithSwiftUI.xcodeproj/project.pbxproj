@@ -20,7 +20,6 @@
 		E67D7497231DDB130026AB86 /* SceneKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7496231DDB130026AB86 /* SceneKitView.swift */; };
 		E67D749A231DDD540026AB86 /* Buzz_lightyear_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */; };
 		E67D749B231DDD540026AB86 /* Buzz.scn in Resources */ = {isa = PBXBuildFile; fileRef = E67D7499231DDD540026AB86 /* Buzz.scn */; };
-		E681677D23333F0E00699135 /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E681677C23333F0E00699135 /* ButtonsView.swift */; };
 		E6C5F598231E200B0087F34B /* UniverseSpherical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E6C5F597231E200B0087F34B /* UniverseSpherical.jpg */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +39,6 @@
 		E67D7496231DDB130026AB86 /* SceneKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitView.swift; sourceTree = "<group>"; };
 		E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Buzz_lightyear_diffuse.png; sourceTree = "<group>"; };
 		E67D7499231DDD540026AB86 /* Buzz.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Buzz.scn; sourceTree = "<group>"; };
-		E681677C23333F0E00699135 /* ButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
 		E6C5F597231E200B0087F34B /* UniverseSpherical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = UniverseSpherical.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +80,6 @@
 				E67A299823406E40007E3011 /* BuzzFaceLampButton.swift */,
 				E63BA8372341A9A900E31220 /* SunLightButton.swift */,
 				E67D7486231DDAB40026AB86 /* ContentView.swift */,
-				E681677C23333F0E00699135 /* ButtonsView.swift */,
 				E67D7488231DDAB50026AB86 /* Assets.xcassets */,
 				E67D748D231DDAB50026AB86 /* LaunchScreen.storyboard */,
 				E67D7490231DDAB50026AB86 /* Info.plist */,
@@ -185,7 +182,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E681677D23333F0E00699135 /* ButtonsView.swift in Sources */,
 				E63BA8382341A9A900E31220 /* SunLightButton.swift in Sources */,
 				E67D7483231DDAB40026AB86 /* AppDelegate.swift in Sources */,
 				E67D7485231DDAB40026AB86 /* SceneDelegate.swift in Sources */,

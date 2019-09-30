@@ -17,8 +17,14 @@ struct ContentView: View {
         VStack(alignment: .center, spacing: 20) {
             Spacer()
 
+            Text("Buzz In SwiftUI")
+                .fixedSize()
+                .font(.largeTitle)
+
+            Spacer()
+
             SceneKitView(lightSwitch: $lightSwitch, sunlightSwitch: $sunlightSwitch)
-                .scaleEffect(0.75, anchor: .top)
+                .scaleEffect(0.85, anchor: .top)
 
             Spacer()
 
