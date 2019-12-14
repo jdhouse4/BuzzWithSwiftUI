@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E63BA8382341A9A900E31220 /* SunLightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63BA8372341A9A900E31220 /* SunLightButton.swift */; };
 		E6724D15231ECD55009D3ED9 /* MilkyWaySpherical2048.png in Resources */ = {isa = PBXBuildFile; fileRef = E6724D14231ECD55009D3ED9 /* MilkyWaySpherical2048.png */; };
-		E6724D17231F769A009D3ED9 /* SpriteKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6724D16231F769A009D3ED9 /* SpriteKitView.swift */; };
 		E67A299923406E40007E3011 /* BuzzFaceLampButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67A299823406E40007E3011 /* BuzzFaceLampButton.swift */; };
 		E67D7483231DDAB40026AB86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7482231DDAB40026AB86 /* AppDelegate.swift */; };
 		E67D7485231DDAB40026AB86 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7484231DDAB40026AB86 /* SceneDelegate.swift */; };
@@ -20,13 +19,11 @@
 		E67D7497231DDB130026AB86 /* SceneKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7496231DDB130026AB86 /* SceneKitView.swift */; };
 		E67D749A231DDD540026AB86 /* Buzz_lightyear_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */; };
 		E67D749B231DDD540026AB86 /* Buzz.scn in Resources */ = {isa = PBXBuildFile; fileRef = E67D7499231DDD540026AB86 /* Buzz.scn */; };
-		E6C5F598231E200B0087F34B /* UniverseSpherical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E6C5F597231E200B0087F34B /* UniverseSpherical.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E63BA8372341A9A900E31220 /* SunLightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunLightButton.swift; sourceTree = "<group>"; };
 		E6724D14231ECD55009D3ED9 /* MilkyWaySpherical2048.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MilkyWaySpherical2048.png; sourceTree = "<group>"; };
-		E6724D16231F769A009D3ED9 /* SpriteKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitView.swift; sourceTree = "<group>"; };
 		E67A299823406E40007E3011 /* BuzzFaceLampButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuzzFaceLampButton.swift; sourceTree = "<group>"; };
 		E67D747F231DDAB40026AB86 /* BuzzWithSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuzzWithSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67D7482231DDAB40026AB86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,7 +36,6 @@
 		E67D7496231DDB130026AB86 /* SceneKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitView.swift; sourceTree = "<group>"; };
 		E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Buzz_lightyear_diffuse.png; sourceTree = "<group>"; };
 		E67D7499231DDD540026AB86 /* Buzz.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Buzz.scn; sourceTree = "<group>"; };
-		E6C5F597231E200B0087F34B /* UniverseSpherical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = UniverseSpherical.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,11 +71,10 @@
 				E67D749C231DDD5F0026AB86 /* SceneKitAssets */,
 				E67D7482231DDAB40026AB86 /* AppDelegate.swift */,
 				E67D7484231DDAB40026AB86 /* SceneDelegate.swift */,
-				E6724D16231F769A009D3ED9 /* SpriteKitView.swift */,
+				E67D7486231DDAB40026AB86 /* ContentView.swift */,
 				E67D7496231DDB130026AB86 /* SceneKitView.swift */,
 				E67A299823406E40007E3011 /* BuzzFaceLampButton.swift */,
 				E63BA8372341A9A900E31220 /* SunLightButton.swift */,
-				E67D7486231DDAB40026AB86 /* ContentView.swift */,
 				E67D7488231DDAB50026AB86 /* Assets.xcassets */,
 				E67D748D231DDAB50026AB86 /* LaunchScreen.storyboard */,
 				E67D7490231DDAB50026AB86 /* Info.plist */,
@@ -100,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				E6724D14231ECD55009D3ED9 /* MilkyWaySpherical2048.png */,
-				E6C5F597231E200B0087F34B /* UniverseSpherical.jpg */,
 				E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */,
 				E67D7499231DDD540026AB86 /* Buzz.scn */,
 			);
@@ -166,7 +160,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6724D15231ECD55009D3ED9 /* MilkyWaySpherical2048.png in Resources */,
-				E6C5F598231E200B0087F34B /* UniverseSpherical.jpg in Resources */,
 				E67D748F231DDAB50026AB86 /* LaunchScreen.storyboard in Resources */,
 				E67D749B231DDD540026AB86 /* Buzz.scn in Resources */,
 				E67D749A231DDD540026AB86 /* Buzz_lightyear_diffuse.png in Resources */,
@@ -188,7 +181,6 @@
 				E67D7487231DDAB40026AB86 /* ContentView.swift in Sources */,
 				E67D7497231DDB130026AB86 /* SceneKitView.swift in Sources */,
 				E67A299923406E40007E3011 /* BuzzFaceLampButton.swift in Sources */,
-				E6724D17231F769A009D3ED9 /* SpriteKitView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +248,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -310,7 +302,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -329,6 +321,7 @@
 				DEVELOPMENT_TEAM = 7CCAB8L658;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BuzzWithSwiftUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -349,6 +342,7 @@
 				DEVELOPMENT_TEAM = 7CCAB8L658;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BuzzWithSwiftUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

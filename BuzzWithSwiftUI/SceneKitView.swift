@@ -51,7 +51,7 @@ struct SceneKitView: UIViewRepresentable {
         scene.rootNode.addChildNode(cameraNode)
 
         // Place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 10, z: 20)
+        cameraNode.position = SCNVector3(x: 0, y: 0.0, z: 20)
 
         // Configure camera within view
         scnView.pointOfView = cameraNode
@@ -83,11 +83,20 @@ struct SceneKitView: UIViewRepresentable {
         lightTextNode.text = sunlightNode.light!.type.rawValue
         lightTextNode.fontSize = 30
         lightTextNode.fontColor = .white
-        lightTextNode.position = CGPoint(x: screenCenter.x,
-                                         y:  50)
+        lightTextNode.position = CGPoint(x: screenCenter.x, y:  50)
         overlayScene.addChild(lightTextNode)
 
         scnView.overlaySKScene = overlayScene
+
+
+        // Double-Tap Gesture Recognizer to Reset Orientation of the Model
+        let doubleTapGestureRecognizer = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.triggerDoubleTapAction(gestureReconizer:)))
+        doubleTapGestureRecognizer.numberOfTapsRequired = 2
+        scnView.addGestureRecognizer(doubleTapGestureRecognizer)
+
+
+        let panGestureRecognizer = UIPanGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.panGesture(_:)))
+        scnView.addGestureRecognizer(panGestureRecognizer)
 
         return scnView
     }
@@ -100,8 +109,9 @@ struct SceneKitView: UIViewRepresentable {
 
         scnView.backgroundColor = UIColor.black
 
-        // allows the user to manipulate the camera
-        scnView.allowsCameraControl = true
+        scnView.allowsCameraControl                                 = false
+        //scnView.cameraControlConfiguration.autoSwitchToFreeCamera   = false
+        //scnView.cameraControlConfiguration.allowsTranslation        = false
 
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
@@ -155,6 +165,96 @@ struct SceneKitView: UIViewRepresentable {
             self.scnView = scnView
             self._lightSwitch = lightSwitch
             self._sunlightSwitch = sunlightSwitch
+        }
+
+
+
+        // Double-Tap Action
+        @objc func triggerDoubleTapAction(gestureReconizer: UITapGestureRecognizer) {
+              //Add alert to show it works
+            print("Hello, Double-Tap!")
+
+            guard let buzzNode = self.scnView.scene.rootNode.childNode(withName: "Buzz", recursively: true) else{
+                print("There's no Buzz Node!")
+                return
+            }
+
+            print("Buzz orientation: \(buzzNode.orientation) and total change pivot: \(totalChangePivot)")
+
+            let currentPivot = buzzNode.pivot
+            let changePivot = SCNMatrix4Invert( totalChangePivot )
+
+            buzzNode.pivot = SCNMatrix4Mult(changePivot, currentPivot)
+
+            buzzNode.transform = SCNMatrix4Identity
+        }
+
+
+
+        // Pan Action
+        var initialCenter = CGPoint()  // The initial center point of the view.
+
+        @objc func panPiece(_ gestureRecognizer : UIPanGestureRecognizer) {
+            guard gestureRecognizer.view != nil else {return}
+
+            let piece = gestureRecognizer.view!
+
+            // Get the changes in the X and Y directions relative to the superview's coordinate space.
+            let translation = gestureRecognizer.translation(in: piece.superview)
+
+            if gestureRecognizer.state == .began {
+
+                // Save the view's original position.
+              self.initialCenter = piece.center
+            }
+
+            // Update the position for the .began, .changed, and .ended states
+            if gestureRecognizer.state != .cancelled {
+              // Add the X and Y translation to the view's original position.
+              let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
+              piece.center = newCenter
+            }
+           else {
+              // On cancellation, return the piece to its original location.
+              piece.center = initialCenter
+           }
+        }
+
+
+        var totalChangePivot = SCNMatrix4Identity
+
+        @objc func panGesture(_ gestureRecognize: UIPanGestureRecognizer){
+
+            let translation = gestureRecognize.translation(in: gestureRecognize.view!)
+
+            let x = Float(translation.x)
+            let y = Float(-translation.y)
+
+            let anglePan = sqrt(pow(x,2)+pow(y,2))*(Float)(Double.pi)/180.0
+
+            guard let buzzNode = self.scnView.scene.rootNode.childNode(withName: "Buzz", recursively: true) else{
+                print("There's no Buzz Node!")
+                return
+            }
+
+            var rotationVector = buzzNode.rotation // SCNVector4()
+            rotationVector.x = -y
+            rotationVector.y = x
+            rotationVector.z = 0
+            rotationVector.w = anglePan
+
+            buzzNode.rotation = rotationVector
+
+            if(gestureRecognize.state == UIGestureRecognizer.State.ended) {
+
+                let currentPivot = buzzNode.pivot
+                let changePivot = SCNMatrix4Invert( buzzNode.transform)
+
+                totalChangePivot = SCNMatrix4Mult(changePivot, currentPivot)
+                buzzNode.pivot = SCNMatrix4Mult(changePivot, currentPivot)
+
+                buzzNode.transform = SCNMatrix4Identity
+            }
         }
     }
 }

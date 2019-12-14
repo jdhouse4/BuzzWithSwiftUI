@@ -25,7 +25,7 @@ struct ContentView: View {
             Spacer()
 
             SceneKitView(lightSwitch: $lightSwitch, sunlightSwitch: $sunlightSwitch)
-                .scaleEffect(0.85, anchor: .top)
+                .scaleEffect(1.0, anchor: .top)
 
             Spacer()
 
