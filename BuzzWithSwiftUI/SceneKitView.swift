@@ -171,22 +171,24 @@ struct SceneKitView: UIViewRepresentable {
 
         // Double-Tap Action
         @objc func triggerDoubleTapAction(gestureReconizer: UITapGestureRecognizer) {
-              //Add alert to show it works
-            print("Hello, Double-Tap!")
 
             guard let buzzNode = self.scnView.scene.rootNode.childNode(withName: "Buzz", recursively: true) else{
                 print("There's no Buzz Node!")
                 return
             }
 
-            print("Buzz orientation: \(buzzNode.orientation) and total change pivot: \(totalChangePivot)")
-
             let currentPivot = buzzNode.pivot
+            //print("Buzz pivot: \(buzzNode.pivot)")
+
             let changePivot = SCNMatrix4Invert( totalChangePivot )
 
             buzzNode.pivot = SCNMatrix4Mult(changePivot, currentPivot)
+            //print("Buzz pivot post SCNMatrix4Mult: \(buzzNode.pivot)")
 
-            buzzNode.transform = SCNMatrix4Identity
+            // For some reason, setting m11, m22, m33 to 1.0 zooms the camera. This is a hack that fixes that issue.
+            buzzNode.transform.m11 = 0.5
+            buzzNode.transform.m22 = 0.5
+            buzzNode.transform.m33 = 0.5
         }
 
 
