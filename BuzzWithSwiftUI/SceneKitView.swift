@@ -29,7 +29,7 @@ struct SceneKitView: UIViewRepresentable {
     // SceneKit Properties
     let scene = SCNScene(named: "Buzz.scn")!
 
-    var sunlightNode: SCNNode = SCNNode()
+    //var sunlightNode: SCNNode = SCNNode()
 
     var lightTextNode: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
 
@@ -41,34 +41,14 @@ struct SceneKitView: UIViewRepresentable {
         // retrieve the SCNView
         let scnView = SCNView()
 
-
         // configure the view
         scnView.backgroundColor = UIColor.black
 
+        // WorldCamera from scn file.
+        scnView.pointOfView = scene.rootNode.childNode(withName: "WorldCamera", recursively: true)
 
-        // Create and add a camera to the scene
-        let cameraNode      = SCNNode()
-        cameraNode.camera   = SCNCamera()
-        cameraNode.name     = "Camera"
-        scene.rootNode.addChildNode(cameraNode)
-
-        // Place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0.0, z: 40)
-
-        // Configure camera within view
-        scnView.pointOfView = cameraNode
-
-
-        // Create sunlight node to shine a little light on the whole scene.
-        sunlightNode.name = "ChangingLightNode"
-        sunlightNode.light = SCNLight()
-        sunlightNode.light!.type = .directional
-        sunlightNode.light!.intensity = 1000.0
-        sunlightNode.light!.categoryBitMask = -1
-        sunlightNode.light!.castsShadow = true
-        sunlightNode.position = SCNVector3(x: 0.0, y: 8.0, z: 20.0)
-        scene.rootNode.addChildNode(sunlightNode)
-
+        // Now, using WorldLight from scn file.
+        let worldLight  = scene.rootNode.childNode(withName: "SunLight", recursively: true)!
 
         // This code is needed for placing the overlay text.
         let screenSize: CGSize =  UIScreen.main.bounds.size
@@ -82,7 +62,8 @@ struct SceneKitView: UIViewRepresentable {
 
         // Add-in SKLabelNode for the light currently in use
         lightTextNode.name = "SunlightTypeTextNode"
-        lightTextNode.text = sunlightNode.light!.type.rawValue
+        //lightTextNode.text = sunlightNode.light!.type.rawValue
+        lightTextNode.text = worldLight.light!.type.rawValue
         lightTextNode.fontSize = 30
         lightTextNode.fontColor = .white
         lightTextNode.position = CGPoint(x: screenCenter.x, y:  50)
@@ -112,8 +93,6 @@ struct SceneKitView: UIViewRepresentable {
         scnView.backgroundColor = UIColor.black
 
         scnView.allowsCameraControl                                 = false
-        //scnView.cameraControlConfiguration.autoSwitchToFreeCamera   = false
-        //scnView.cameraControlConfiguration.allowsTranslation        = false
 
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
@@ -128,30 +107,33 @@ struct SceneKitView: UIViewRepresentable {
 
     
     func toggleBuzzFaceLamp(_ scnView: SCNView) {
-        let lightNode = scnView.scene!.rootNode.childNode(withName: "BuzzFaceLight", recursively: true)
+        guard let lightNode = scnView.scene!.rootNode.childNode(withName: "BuzzFaceLight", recursively: true) else { return }
 
-        lightNode!.isHidden = lightSwitch
+        lightNode.isHidden = lightSwitch
     }
 
 
 
     func toggleSunlight(_ scnView: SCNView) {
+        //var sunlightNode = scnView.scene!.rootNode.childNode(withName: "WorldLight", recursively: true)
+        guard let worldLight = scnView.scene!.rootNode.childNode(withName: "SunLight", recursively: true) else { return }
+
         switch sunlightSwitch {
         case 0:
-            sunlightNode.light?.type = .directional
-            lightTextNode.text = sunlightNode.light?.type.rawValue
+            worldLight.light?.type = .directional
+            lightTextNode.text = worldLight.light?.type.rawValue
         case 1:
-            sunlightNode.light?.type = .spot
-            lightTextNode.text = sunlightNode.light?.type.rawValue
+            worldLight.light?.type = .spot
+            lightTextNode.text = worldLight.light?.type.rawValue
         case 2:
-            sunlightNode.light?.type = .omni
-            lightTextNode.text = sunlightNode.light?.type.rawValue
+            worldLight.light?.type = .omni
+            lightTextNode.text = worldLight.light?.type.rawValue
         case 3:
-            sunlightNode.light?.type = .ambient
-            lightTextNode.text = sunlightNode.light?.type.rawValue
+            worldLight.light?.type = .ambient
+            lightTextNode.text = worldLight.light?.type.rawValue
         default:
-            sunlightNode.light?.type = .directional
-            lightTextNode.text = sunlightNode.light?.type.rawValue
+            worldLight.light?.type = .directional
+            lightTextNode.text = worldLight.light?.type.rawValue
         }
     }
 
@@ -161,7 +143,8 @@ struct SceneKitView: UIViewRepresentable {
         if buzzBodyCameraSwitch == true {
             scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "BuzzBodyCamera", recursively: true)
         } else {
-            scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "Camera", recursively: true)
+            //scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "Camera", recursively: true)
+            scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "WorldCamera", recursively: true)
         }
     }
 
@@ -229,6 +212,7 @@ struct SceneKitView: UIViewRepresentable {
               piece.center = initialCenter
            }
         }
+
 
 
         var totalChangePivot = SCNMatrix4Identity
