@@ -51,7 +51,7 @@ struct SceneKitView: UIViewRepresentable {
         scene.rootNode.addChildNode(cameraNode)
 
         // Place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0.0, z: 20)
+        cameraNode.position = SCNVector3(x: 0, y: 0.0, z: 40)
 
         // Configure camera within view
         scnView.pointOfView = cameraNode
@@ -61,10 +61,10 @@ struct SceneKitView: UIViewRepresentable {
         sunlightNode.name = "ChangingLightNode"
         sunlightNode.light = SCNLight()
         sunlightNode.light!.type = .directional
-        sunlightNode.light!.intensity = 500.0
-        sunlightNode.light!.categoryBitMask = 2
+        sunlightNode.light!.intensity = 1000.0
+        sunlightNode.light!.categoryBitMask = -1
         sunlightNode.light!.castsShadow = true
-        sunlightNode.position = SCNVector3(x: 0.0, y: 8.0, z: 15)
+        sunlightNode.position = SCNVector3(x: 0.0, y: 8.0, z: 20.0)
         scene.rootNode.addChildNode(sunlightNode)
 
 
@@ -183,12 +183,6 @@ struct SceneKitView: UIViewRepresentable {
             let changePivot = SCNMatrix4Invert( totalChangePivot )
 
             buzzNode.pivot = SCNMatrix4Mult(changePivot, currentPivot)
-            //print("Buzz pivot post SCNMatrix4Mult: \(buzzNode.pivot)")
-
-            // For some reason, setting m11, m22, m33 to 1.0 zooms the camera. This is a hack that fixes that issue.
-            buzzNode.transform.m11 = 0.5
-            buzzNode.transform.m22 = 0.5
-            buzzNode.transform.m33 = 0.5
         }
 
 
