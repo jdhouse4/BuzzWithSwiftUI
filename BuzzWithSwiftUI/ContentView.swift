@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var lightSwitch: Bool = false
-    @State var sunlightSwitch: Int = 0
+    @State var lightSwitch: Bool            = false
+    @State var sunlightSwitch: Int          = 0
+    @State var buzzBodyCameraSwitch: Bool   = false
 
 
     var body: some View {
@@ -24,21 +25,31 @@ struct ContentView: View {
 
             Spacer()
 
-            SceneKitView(lightSwitch: $lightSwitch, sunlightSwitch: $sunlightSwitch)
+            SceneKitView(lightSwitch: $lightSwitch, sunlightSwitch: $sunlightSwitch, buzzBodyCameraSwitch: $buzzBodyCameraSwitch)
                 .scaleEffect(1.0, anchor: .top)
 
             Spacer()
 
-            HStack {
-                Spacer()
+            VStack {
+                HStack {
+                    Spacer()
 
-                BuzzFaceLampButton(lightSwitch: $lightSwitch)
+                    BuzzFaceLampButton(lightSwitch: $lightSwitch)
 
-                Spacer(minLength: 150)
+                    Spacer(minLength: 150)
 
-                SunLightButton(sunlightSwitch: $sunlightSwitch)
+                    SunLightButton(sunlightSwitch: $sunlightSwitch)
 
-                Spacer()
+                    Spacer()
+                }
+
+                HStack {
+                    Spacer()
+
+                    CameraButton(buzzBodyCameraSwitch: $buzzBodyCameraSwitch)
+
+                    Spacer()
+                }
             }
         }
     .padding()

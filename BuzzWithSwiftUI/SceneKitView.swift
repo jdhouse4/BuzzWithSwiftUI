@@ -23,6 +23,7 @@ struct SceneKitView: UIViewRepresentable {
 
     @Binding var lightSwitch: Bool
     @Binding var sunlightSwitch: Int
+    @Binding var buzzBodyCameraSwitch: Bool
 
 
     // SceneKit Properties
@@ -46,8 +47,9 @@ struct SceneKitView: UIViewRepresentable {
 
 
         // Create and add a camera to the scene
-        let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
+        let cameraNode      = SCNNode()
+        cameraNode.camera   = SCNCamera()
+        cameraNode.name     = "Camera"
         scene.rootNode.addChildNode(cameraNode)
 
         // Place the camera
@@ -119,6 +121,8 @@ struct SceneKitView: UIViewRepresentable {
         toggleBuzzFaceLamp(scnView)
 
         toggleSunlight(scnView)
+
+        toggleBuzzBodyCamera(scnView)
     }
 
 
@@ -148,6 +152,16 @@ struct SceneKitView: UIViewRepresentable {
         default:
             sunlightNode.light?.type = .directional
             lightTextNode.text = sunlightNode.light?.type.rawValue
+        }
+    }
+
+
+
+    func toggleBuzzBodyCamera(_ scnView: SCNView) {
+        if buzzBodyCameraSwitch == true {
+            scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "BuzzBodyCamera", recursively: true)
+        } else {
+            scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "Camera", recursively: true)
         }
     }
 

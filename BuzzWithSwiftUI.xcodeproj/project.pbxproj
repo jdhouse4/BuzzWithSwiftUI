@@ -19,6 +19,7 @@
 		E67D7497231DDB130026AB86 /* SceneKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7496231DDB130026AB86 /* SceneKitView.swift */; };
 		E67D749A231DDD540026AB86 /* Buzz_lightyear_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */; };
 		E67D749B231DDD540026AB86 /* Buzz.scn in Resources */ = {isa = PBXBuildFile; fileRef = E67D7499231DDD540026AB86 /* Buzz.scn */; };
+		E6ED2AEC23A5F2E2008104BE /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ED2AEB23A5F2E2008104BE /* CameraButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		E67D7496231DDB130026AB86 /* SceneKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitView.swift; sourceTree = "<group>"; };
 		E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Buzz_lightyear_diffuse.png; sourceTree = "<group>"; };
 		E67D7499231DDD540026AB86 /* Buzz.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Buzz.scn; sourceTree = "<group>"; };
+		E6ED2AEB23A5F2E2008104BE /* CameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				E67D7496231DDB130026AB86 /* SceneKitView.swift */,
 				E67A299823406E40007E3011 /* BuzzFaceLampButton.swift */,
 				E63BA8372341A9A900E31220 /* SunLightButton.swift */,
+				E6ED2AEB23A5F2E2008104BE /* CameraButton.swift */,
 				E67D7488231DDAB50026AB86 /* Assets.xcassets */,
 				E67D748D231DDAB50026AB86 /* LaunchScreen.storyboard */,
 				E67D7490231DDAB50026AB86 /* Info.plist */,
@@ -181,6 +184,7 @@
 				E67D7487231DDAB40026AB86 /* ContentView.swift in Sources */,
 				E67D7497231DDB130026AB86 /* SceneKitView.swift in Sources */,
 				E67A299923406E40007E3011 /* BuzzFaceLampButton.swift in Sources */,
+				E6ED2AEC23A5F2E2008104BE /* CameraButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
