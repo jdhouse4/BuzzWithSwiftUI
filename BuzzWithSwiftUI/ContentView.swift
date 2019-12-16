@@ -15,42 +15,25 @@ struct ContentView: View {
 
 
     var body: some View {
-        VStack(alignment: .center, spacing: 20) {
+        VStack(alignment: .center, spacing: 10) {
             Spacer()
 
             Text("Buzz In SwiftUI")
                 .fixedSize()
                 .font(.largeTitle)
-                
 
             Spacer()
 
-            SceneKitView(lightSwitch: $lightSwitch, sunlightSwitch: $sunlightSwitch, buzzBodyCameraSwitch: $buzzBodyCameraSwitch)
+            SceneKitView(lightSwitch: $lightSwitch,
+                         sunlightSwitch: $sunlightSwitch,
+                         buzzBodyCameraSwitch: $buzzBodyCameraSwitch)
                 .scaleEffect(1.0, anchor: .top)
 
             Spacer()
 
-            VStack {
-                HStack {
-                    Spacer()
+            ControlsView(lightSwitch: $lightSwitch, sunlightSwitch: $sunlightSwitch, buzzBodyCameraSwitch: $buzzBodyCameraSwitch)
 
-                    BuzzFaceLampButton(lightSwitch: $lightSwitch)
-
-                    Spacer(minLength: 150)
-
-                    SunLightButton(sunlightSwitch: $sunlightSwitch)
-
-                    Spacer()
-                }
-
-                HStack {
-                    Spacer()
-
-                    CameraButton(buzzBodyCameraSwitch: $buzzBodyCameraSwitch)
-
-                    Spacer()
-                }
-            }
+            Spacer(minLength: 50)
         }
     .padding()
     }

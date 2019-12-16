@@ -20,6 +20,7 @@
 		E67D749A231DDD540026AB86 /* Buzz_lightyear_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */; };
 		E67D749B231DDD540026AB86 /* Buzz.scn in Resources */ = {isa = PBXBuildFile; fileRef = E67D7499231DDD540026AB86 /* Buzz.scn */; };
 		E6ED2AEC23A5F2E2008104BE /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ED2AEB23A5F2E2008104BE /* CameraButton.swift */; };
+		E6ED2AEE23A7DEF9008104BE /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ED2AED23A7DEF9008104BE /* ControlsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Buzz_lightyear_diffuse.png; sourceTree = "<group>"; };
 		E67D7499231DDD540026AB86 /* Buzz.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Buzz.scn; sourceTree = "<group>"; };
 		E6ED2AEB23A5F2E2008104BE /* CameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
+		E6ED2AED23A7DEF9008104BE /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ControlsView.swift; path = BuzzWithSwiftUI/ControlsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		E67D7476231DDAB40026AB86 = {
 			isa = PBXGroup;
 			children = (
+				E6ED2AED23A7DEF9008104BE /* ControlsView.swift */,
 				E67D7481231DDAB40026AB86 /* BuzzWithSwiftUI */,
 				E67D7480231DDAB40026AB86 /* Products */,
 			);
@@ -182,6 +185,7 @@
 				E67D7483231DDAB40026AB86 /* AppDelegate.swift in Sources */,
 				E67D7485231DDAB40026AB86 /* SceneDelegate.swift in Sources */,
 				E67D7487231DDAB40026AB86 /* ContentView.swift in Sources */,
+				E6ED2AEE23A7DEF9008104BE /* ControlsView.swift in Sources */,
 				E67D7497231DDB130026AB86 /* SceneKitView.swift in Sources */,
 				E67A299923406E40007E3011 /* BuzzFaceLampButton.swift in Sources */,
 				E6ED2AEC23A5F2E2008104BE /* CameraButton.swift in Sources */,
