@@ -23,7 +23,7 @@ struct SceneKitView: UIViewRepresentable {
 
     @Binding var lightSwitch: Bool
     @Binding var sunlightSwitch: Int
-    @Binding var buzzBodyCameraSwitch: Bool
+    @Binding var bodyCameraSwitch: Bool
 
 
     // SceneKit Properties
@@ -50,6 +50,7 @@ struct SceneKitView: UIViewRepresentable {
         // Now, using WorldLight from scn file.
         let worldLight  = scene.rootNode.childNode(withName: "SunLight", recursively: true)!
 
+        
         // This code is needed for placing the overlay text.
         let screenSize: CGSize =  UIScreen.main.bounds.size
 
@@ -62,7 +63,6 @@ struct SceneKitView: UIViewRepresentable {
 
         // Add-in SKLabelNode for the light currently in use
         lightTextNode.name = "SunlightTypeTextNode"
-        //lightTextNode.text = sunlightNode.light!.type.rawValue
         lightTextNode.text = worldLight.light!.type.rawValue
         lightTextNode.fontSize = 30
         lightTextNode.fontColor = .white
@@ -92,7 +92,7 @@ struct SceneKitView: UIViewRepresentable {
 
         scnView.backgroundColor = UIColor.black
 
-        scnView.allowsCameraControl                                 = false
+        scnView.allowsCameraControl = false
 
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
@@ -140,8 +140,8 @@ struct SceneKitView: UIViewRepresentable {
 
 
     func toggleBuzzBodyCamera(_ scnView: SCNView) {
-        if buzzBodyCameraSwitch == true {
-            scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "BuzzBodyCamera", recursively: true)
+        if bodyCameraSwitch == true {
+            scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "BodyCamera", recursively: true)
         } else {
             //scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "Camera", recursively: true)
             scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "WorldCamera", recursively: true)

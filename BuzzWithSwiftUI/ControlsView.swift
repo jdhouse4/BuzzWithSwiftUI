@@ -12,7 +12,7 @@ struct ControlsView: View {
 
     @Binding var lightSwitch: Bool
     @Binding var sunlightSwitch: Int
-    @Binding var buzzBodyCameraSwitch: Bool
+    @Binding var bodyCameraSwitch: Bool
 
 
 
@@ -34,7 +34,7 @@ struct ControlsView: View {
             HStack {
                 Spacer()
 
-                CameraButton(buzzBodyCameraSwitch: $buzzBodyCameraSwitch)
+                CameraButton(bodyCameraSwitch: $bodyCameraSwitch)
 
                 Spacer()
             }
@@ -48,7 +48,7 @@ struct ControlsView: View {
 /*
 struct ControlsView_Previews: PreviewProvider {
     static var previews: some View {
-        ControlsView(lightSwitch: lightSwitch, sunlightSwitch: sunlightSwitch, buzzBodyCameraSwitch: buzzBodyCamera)
+        ControlsView(lightSwitch: lightSwitch, sunlightSwitch: sunlightSwitch, bodyCameraSwitch: buzzBodyCamera)
     }
 }
 */
