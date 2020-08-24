@@ -147,7 +147,6 @@ struct SceneKitView: UIViewRepresentable {
         if bodyCameraSwitch == true {
             scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "BodyCamera", recursively: true)
         } else {
-            //scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "Camera", recursively: true)
             scnView.pointOfView = scnView.scene?.rootNode.childNode(withName: "WorldCamera", recursively: true)
         }
     }
@@ -162,10 +161,13 @@ struct SceneKitView: UIViewRepresentable {
 
         var scnView: SceneKitView
 
+        var totalChangePivot = SCNMatrix4Identity
+
+
         init(_ scnView: SceneKitView, lightSwitch: Binding<Bool>, sunlightSwitch: Binding<Int>) {
-            self.scnView = scnView
-            self._lightSwitch = lightSwitch
-            self._sunlightSwitch = sunlightSwitch
+            self.scnView            = scnView
+            self._lightSwitch       = lightSwitch
+            self._sunlightSwitch    = sunlightSwitch
         }
 
 
@@ -178,52 +180,16 @@ struct SceneKitView: UIViewRepresentable {
                 return
             }
 
-            let currentPivot = buzzNode.pivot
+            let currentPivot    = buzzNode.pivot
             //print("currentPivot: \(currentPivot)")
 
-            let changePivot = SCNMatrix4Invert( totalChangePivot )
+            let changePivot     = SCNMatrix4Invert( totalChangePivot )
             //print("changePivot = \(changePivot)")
 
-            buzzNode.pivot = SCNMatrix4Mult(changePivot, currentPivot)
+            buzzNode.pivot      = SCNMatrix4Mult(changePivot, currentPivot)
 
-            totalChangePivot = SCNMatrix4Identity
+            totalChangePivot    = SCNMatrix4Identity
         }
-
-
-
-        // Pan Action
-        //var initialCenter = CGPoint()  // The initial center point of the view.
-
-        /*
-        @objc func panPiece(_ gestureRecognizer : UIPanGestureRecognizer) {
-            guard gestureRecognizer.view != nil else {return}
-
-            let piece = gestureRecognizer.view!
-
-            // Get the changes in the X and Y directions relative to the superview's coordinate space.
-            let translation = gestureRecognizer.translation(in: piece.superview)
-
-            if gestureRecognizer.state == .began {
-
-                // Save the view's original position.
-              self.initialCenter = piece.center
-            }
-
-            // Update the position for the .began, .changed, and .ended states
-            if gestureRecognizer.state != .cancelled {
-              // Add the X and Y translation to the view's original position.
-              let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
-              piece.center = newCenter
-            }
-           else {
-              // On cancellation, return the piece to its original location.
-              piece.center = initialCenter
-           }
-        }
-        */
-
-
-        var totalChangePivot = SCNMatrix4Identity
 
 
         @objc func panGesture(_ gestureRecognize: UIPanGestureRecognizer){
