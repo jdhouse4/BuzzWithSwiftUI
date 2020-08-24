@@ -18,7 +18,9 @@ struct ControlsView: View {
 
     var body: some View {
         VStack {
-            HStack {
+            Spacer()
+            
+            HStack(alignment: .center, spacing: 25) {
                 Spacer()
 
                 SunLightButton(sunlightSwitch: $sunlightSwitch)
@@ -27,11 +29,11 @@ struct ControlsView: View {
 
                 BuzzFaceLampButton(lightSwitch: $lightSwitch)
 
-                Spacer(minLength: 150)
+                Spacer()
 
             }
 
-            HStack {
+            HStack(alignment: .center) {
                 Spacer()
 
                 CameraButton(bodyCameraSwitch: $bodyCameraSwitch)

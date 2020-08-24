@@ -9,6 +9,7 @@
 import SwiftUI
 import SceneKit
 import SpriteKit
+import GLKit
 
 
 
@@ -27,7 +28,7 @@ struct SceneKitView: UIViewRepresentable {
 
 
     // SceneKit Properties
-    let scene = SCNScene(named: "Buzz.scn")!
+    let scene = SCNScene(named: "BuzzWithSwiftUISCNAssets.scnassets/Buzz.scn")!
 
     //var sunlightNode: SCNNode = SCNNode()
 
@@ -38,6 +39,7 @@ struct SceneKitView: UIViewRepresentable {
 
 
     func makeUIView(context: Context) -> SCNView {
+        print("SceneKitView makeUIView")
         // retrieve the SCNView
         let scnView = SCNView()
 
@@ -87,6 +89,8 @@ struct SceneKitView: UIViewRepresentable {
 
 
     func updateUIView(_ scnView: SCNView, context: Context) {
+        print("SceneKitView updateUIView(_:SCNView, Context)")
+        
         // set the scene to the view
         scnView.scene = scene
 
@@ -175,18 +179,22 @@ struct SceneKitView: UIViewRepresentable {
             }
 
             let currentPivot = buzzNode.pivot
-            //print("Buzz pivot: \(buzzNode.pivot)")
+            //print("currentPivot: \(currentPivot)")
 
             let changePivot = SCNMatrix4Invert( totalChangePivot )
+            //print("changePivot = \(changePivot)")
 
             buzzNode.pivot = SCNMatrix4Mult(changePivot, currentPivot)
+
+            totalChangePivot = SCNMatrix4Identity
         }
 
 
 
         // Pan Action
-        var initialCenter = CGPoint()  // The initial center point of the view.
+        //var initialCenter = CGPoint()  // The initial center point of the view.
 
+        /*
         @objc func panPiece(_ gestureRecognizer : UIPanGestureRecognizer) {
             guard gestureRecognizer.view != nil else {return}
 
@@ -212,19 +220,21 @@ struct SceneKitView: UIViewRepresentable {
               piece.center = initialCenter
            }
         }
-
+        */
 
 
         var totalChangePivot = SCNMatrix4Identity
 
+
         @objc func panGesture(_ gestureRecognize: UIPanGestureRecognizer){
+            print("SceneKitView Coordinator panGesture")
 
             let translation = gestureRecognize.translation(in: gestureRecognize.view!)
 
             let x = Float(translation.x)
             let y = Float(-translation.y)
 
-            let anglePan = sqrt(pow(x,2)+pow(y,2))*(Float)(Double.pi)/180.0
+            let anglePan = sqrt(pow(x,2)+pow(y,2)) * (Float)(Double.pi) / 180.0
 
             guard let buzzNode = self.scnView.scene.rootNode.childNode(withName: "Buzz", recursively: true) else{
                 print("There's no Buzz Node!")

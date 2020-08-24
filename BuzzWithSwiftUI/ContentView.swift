@@ -15,27 +15,26 @@ struct ContentView: View {
 
 
     var body: some View {
-        VStack(alignment: .center, spacing: 10) {
-            Spacer()
-
-            Text("Buzz In SwiftUI")
-                .fixedSize()
-                .font(.headline)
-
-            Spacer()
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
 
             SceneKitView(lightSwitch: $lightSwitch,
                          sunlightSwitch: $sunlightSwitch,
                          bodyCameraSwitch: $bodyCameraSwitch)
-                .scaleEffect(1.0, anchor: .top)
 
-            Spacer()
+            VStack {
+                Text("Buzz In SwiftUI")
+                    .fixedSize()
+                    .font(.largeTitle)
+                    .foregroundColor(Color.gray)
 
-            ControlsView(lightSwitch: $lightSwitch, sunlightSwitch: $sunlightSwitch, bodyCameraSwitch: $bodyCameraSwitch)
+                Spacer(minLength: 300)
 
-            Spacer(minLength: 50)
+                ControlsView(lightSwitch: $lightSwitch, sunlightSwitch: $sunlightSwitch, bodyCameraSwitch: $bodyCameraSwitch)
+
+                Spacer()
+            }
         }
-    .padding()
     }
 }
 

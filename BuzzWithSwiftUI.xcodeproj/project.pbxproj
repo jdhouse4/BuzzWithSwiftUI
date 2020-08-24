@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E61CC7A624C949D5001F3DA8 /* BuzzWithSwiftUISCNAssets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = E61CC7A524C949D5001F3DA8 /* BuzzWithSwiftUISCNAssets.scnassets */; };
 		E63BA8382341A9A900E31220 /* SunLightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63BA8372341A9A900E31220 /* SunLightButton.swift */; };
-		E6724D15231ECD55009D3ED9 /* MilkyWaySpherical2048.png in Resources */ = {isa = PBXBuildFile; fileRef = E6724D14231ECD55009D3ED9 /* MilkyWaySpherical2048.png */; };
 		E67A299923406E40007E3011 /* BuzzFaceLampButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67A299823406E40007E3011 /* BuzzFaceLampButton.swift */; };
 		E67D7483231DDAB40026AB86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7482231DDAB40026AB86 /* AppDelegate.swift */; };
 		E67D7485231DDAB40026AB86 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7484231DDAB40026AB86 /* SceneDelegate.swift */; };
@@ -17,15 +17,13 @@
 		E67D748C231DDAB50026AB86 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E67D748B231DDAB50026AB86 /* Preview Assets.xcassets */; };
 		E67D748F231DDAB50026AB86 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E67D748D231DDAB50026AB86 /* LaunchScreen.storyboard */; };
 		E67D7497231DDB130026AB86 /* SceneKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D7496231DDB130026AB86 /* SceneKitView.swift */; };
-		E67D749A231DDD540026AB86 /* Buzz_lightyear_diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */; };
-		E67D749B231DDD540026AB86 /* Buzz.scn in Resources */ = {isa = PBXBuildFile; fileRef = E67D7499231DDD540026AB86 /* Buzz.scn */; };
 		E6ED2AEC23A5F2E2008104BE /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ED2AEB23A5F2E2008104BE /* CameraButton.swift */; };
 		E6ED2AEE23A7DEF9008104BE /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ED2AED23A7DEF9008104BE /* ControlsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E61CC7A524C949D5001F3DA8 /* BuzzWithSwiftUISCNAssets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = BuzzWithSwiftUISCNAssets.scnassets; sourceTree = "<group>"; };
 		E63BA8372341A9A900E31220 /* SunLightButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunLightButton.swift; sourceTree = "<group>"; };
-		E6724D14231ECD55009D3ED9 /* MilkyWaySpherical2048.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MilkyWaySpherical2048.png; sourceTree = "<group>"; };
 		E67A299823406E40007E3011 /* BuzzFaceLampButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuzzFaceLampButton.swift; sourceTree = "<group>"; };
 		E67D747F231DDAB40026AB86 /* BuzzWithSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuzzWithSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67D7482231DDAB40026AB86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,8 +34,6 @@
 		E67D748E231DDAB50026AB86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E67D7490231DDAB50026AB86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E67D7496231DDB130026AB86 /* SceneKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitView.swift; sourceTree = "<group>"; };
-		E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Buzz_lightyear_diffuse.png; sourceTree = "<group>"; };
-		E67D7499231DDD540026AB86 /* Buzz.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Buzz.scn; sourceTree = "<group>"; };
 		E6ED2AEB23A5F2E2008104BE /* CameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
 		E6ED2AED23A7DEF9008104BE /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				E67D749C231DDD5F0026AB86 /* SceneKitAssets */,
+				E61CC7A524C949D5001F3DA8 /* BuzzWithSwiftUISCNAssets.scnassets */,
 				E67D7482231DDAB40026AB86 /* AppDelegate.swift */,
 				E67D7484231DDAB40026AB86 /* SceneDelegate.swift */,
 				E67D7486231DDAB40026AB86 /* ContentView.swift */,
@@ -100,9 +97,6 @@
 		E67D749C231DDD5F0026AB86 /* SceneKitAssets */ = {
 			isa = PBXGroup;
 			children = (
-				E6724D14231ECD55009D3ED9 /* MilkyWaySpherical2048.png */,
-				E67D7498231DDD530026AB86 /* Buzz_lightyear_diffuse.png */,
-				E67D7499231DDD540026AB86 /* Buzz.scn */,
 			);
 			path = SceneKitAssets;
 			sourceTree = "<group>";
@@ -165,10 +159,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6724D15231ECD55009D3ED9 /* MilkyWaySpherical2048.png in Resources */,
 				E67D748F231DDAB50026AB86 /* LaunchScreen.storyboard in Resources */,
-				E67D749B231DDD540026AB86 /* Buzz.scn in Resources */,
-				E67D749A231DDD540026AB86 /* Buzz_lightyear_diffuse.png in Resources */,
+				E61CC7A624C949D5001F3DA8 /* BuzzWithSwiftUISCNAssets.scnassets in Resources */,
 				E67D748C231DDAB50026AB86 /* Preview Assets.xcassets in Resources */,
 				E67D7489231DDAB50026AB86 /* Assets.xcassets in Resources */,
 			);
@@ -256,7 +248,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -310,7 +302,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -329,7 +321,7 @@
 				DEVELOPMENT_TEAM = 7CCAB8L658;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BuzzWithSwiftUI/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -350,7 +342,7 @@
 				DEVELOPMENT_TEAM = 7CCAB8L658;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = BuzzWithSwiftUI/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
